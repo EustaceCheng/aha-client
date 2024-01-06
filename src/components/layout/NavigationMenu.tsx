@@ -1,25 +1,8 @@
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  FolderOutlined,
-} from "@ant-design/icons";
-import { Menu, MenuProps, Typography } from "antd";
-import { SIDER_WIDTH } from "../../constants/shared/layout";
+import { FolderOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
 import { LogoIcon } from "../icons/Logo";
 
 const { Text } = Typography;
-const items: MenuProps["items"] = [
-  {
-    label: <Text className="xs:hidden">Home</Text>,
-    key: "mail",
-    icon: <MailOutlined />,
-  },
-  {
-    label: <Text className="xs:hidden">Tags</Text>,
-    key: "app",
-    icon: <AppstoreOutlined />,
-  },
-];
 
 const NavigationMenu = () => {
   return (
