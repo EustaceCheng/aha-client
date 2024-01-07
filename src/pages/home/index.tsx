@@ -1,37 +1,23 @@
-import { Divider, Typography } from "antd";
-import BasicInput from "../../components/shared/BasicInput";
-import BasicSlider from "../../components/shared/BasicSlider";
-import BasicButton from "../../components/shared/BasicButton";
-import { useNavigate } from "react-router-dom";
-
-const { Text } = Typography;
+import { useSearchParams } from "react-router-dom";
+import Follower from "../../components/pages/home/Follower";
+import Search from "../../components/pages/home/Search";
+import Results from "../../components/pages/home/Results";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams({
+    type: "search",
+  });
+  const type = searchParams.get("type");
 
-  const handleClick = () => {
-    navigate("/results");
-  };
   return (
-    <>
-      <div className="flex flex-col text-left">
-        <Text className="text-2xl pb-5">Search</Text>
-        <BasicInput placeholder="Keyword" />
+    <div className="flex min-h-screen">
+      <div className="w-[calc(100%-375px)] pr-[130px] h-full lg:w-full xs:pr-0">
+        {type === "results" ? <Results /> : <Search />}
       </div>
-      <Divider className="my-[30px]" />
-      <div className="flex flex-col text-left">
-        <Text className="text-2xl pb-5"># of results per page</Text>
-        <div className="pb-5">
-          <Text className="text-5xl pr-2.5">30</Text>
-          <Text className="text-base">results</Text>
-        </div>
-        <BasicSlider />
+      <div className="lg:hidden">
+        <Follower />
       </div>
-      <Divider className="my-[30px]" />
-      <div className="absolute bottom-[87px]">
-        <BasicButton label="SEARCH" onClick={handleClick} />
-      </div>
-    </>
+    </div>
   );
 };
 
