@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, List } from "antd";
-import { getFollowings } from "../../../api/following/get";
-import OutlinedButton from "../../shared/OutlinedButton";
+import { getFollowings } from "../../../../api/following/get";
+import OutlinedButton from "../../../shared/OutlinedButton";
 import { UserOutlined } from "@ant-design/icons";
 
 const FollowingList = () => {

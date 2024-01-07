@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFollowers } from "../../../api/follower/get";
+import { getFollowers } from "../../../../api/follower/get";
 import { Avatar, List, Typography } from "antd";
-import ContainedButton from "../../shared/ContainedButton";
-import OutlinedButton from "../../shared/OutlinedButton";
+import ContainedButton from "../../../shared/ContainedButton";
+import OutlinedButton from "../../../shared/OutlinedButton";
 import { UserOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
