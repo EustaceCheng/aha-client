@@ -1,6 +1,5 @@
 import { ConfigProvider, Slider } from "antd";
 import { SliderMarks } from "antd/es/slider";
-import { ChangeEventHandler, useState } from "react";
 
 type BasicSliderProps = {
   value: number;

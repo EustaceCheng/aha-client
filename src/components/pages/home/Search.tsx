@@ -13,15 +13,10 @@ enum FormItemName {
   PAGE_SIZE = "pageSize",
 }
 
-type SubmitForm = {
-  [FormItemName.KEYWORD]: string | undefined;
-  [FormItemName.PAGE_SIZE]: number | undefined;
-};
-
 const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const [sliderValue, setSliderValue] = useState("3");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   const handleSearch = () => {
     setSearchParams({

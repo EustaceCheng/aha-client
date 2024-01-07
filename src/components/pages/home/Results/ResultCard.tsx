@@ -9,7 +9,7 @@ type ResultCardProps = {
   username: string;
 };
 
-const ResultCard = ({ imgUrl, title, username }: ResultCardProps) => {
+const ResultCard = ({ title, username }: ResultCardProps) => {
   return (
     <Card
       hoverable={false}
