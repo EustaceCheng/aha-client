@@ -20,8 +20,8 @@ const Tags = () => {
 
   return (
     <div>
-      <Text className="text-2xl mb-6">Tags</Text>
-      <div className="flex flex-wrap">
+      <Text className="text-2xl">Tags</Text>
+      <div className="flex flex-wrap mt-6 pr-[180px] xs:pr-0">
         {data?.map(({ name, count, id }) => (
           <TagCard key={id} title={name} count={count} />
         ))}
