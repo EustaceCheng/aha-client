@@ -1,6 +1,11 @@
 import { ConfigProvider, Slider } from "antd";
 import { SliderMarks } from "antd/es/slider";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
+
+type BasicSliderProps = {
+  value: number;
+  onChange: (value: number) => void;
+};
 
 function getGradientColor(percentage: number) {
   const startColor = [255, 92, 1];
@@ -15,8 +20,7 @@ function getGradientColor(percentage: number) {
   return `rgb(${midColor.join(",")})`;
 }
 
-const BasicSlider = () => {
-  const [value, setValue] = useState(3);
+const BasicSlider = ({ value = 3, onChange }: BasicSliderProps) => {
   const start = 0;
   const end = (value * 15) / 100;
 
@@ -61,7 +65,7 @@ const BasicSlider = () => {
         marks={marks}
         min={3}
         max={20}
-        onChange={setValue}
+        onChange={onChange}
         step={null}
         tooltip={{ open: false }}
         styles={{

@@ -1,13 +1,19 @@
+import { ChangeEventHandler } from "react";
+
 type BasicInputProps = {
   placeholder: string;
+  value: string | undefined;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-const BasicInput = ({ placeholder }: BasicInputProps) => {
+const BasicInput = ({ placeholder, value, onChange }: BasicInputProps) => {
   return (
     <input
       type="text"
+      value={value}
+      onChange={onChange}
       placeholder={placeholder}
-      className="w-auto h-[60px] rounded-md border-3 border-grey bg-inherit px-[18px] focus:border-orange focus:outline-none focus:text-white"
+      className="w-auto h-[60px] text-white rounded-md border-3 border-grey bg-inherit px-[18px] placeholder:text-grey focus:border-orange focus:outline-none focus:text-white"
     />
   );
 };
