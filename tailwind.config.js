@@ -5,7 +5,7 @@ export default {
     screens: {
       xs: { max: "480px" },
       sm: "480px",
-      lg: { max: "1440" },
+      lg: { max: "1140px" },
     },
     extend: {
       borderRadius: {
