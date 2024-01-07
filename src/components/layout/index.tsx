@@ -7,8 +7,8 @@ const { Header, Content } = Layout;
 
 const BasicLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Layout className="min-h-screen bg-black xs:px-[21px] sm:pl-[211px] sm:pr-[131px]">
-      <Header className="bg-black h-[70px] pl-5 pt-7 sm:hidden">
+    <Layout className="min-h-screen bg-black xs:px-[21px] sm:pl-[211px] sm:pt-[54px]">
+      <Header className="bg-black h-[70px] pl-0 pt-7 sm:hidden">
         <span>
           <LogoIcon />
         </span>
@@ -27,7 +27,7 @@ const BasicLayout = ({ children }: { children: React.ReactNode }) => {
         >
           <NavigationMenu />
         </Drawer>
-        {children}
+        <div>{children}</div>
       </Content>
       <footer className="bg-black py-[21px] sm:hidden">
         <span>

@@ -11,13 +11,13 @@ const NavigationMenu = () => {
         <LogoIcon />
       </li>
       <li className="sm:mb-[22px] xs:mr-[50px]">
-        <a className="flex flex-col items-center">
+        <a className="flex flex-col items-center" href="/">
           <FolderOutlined style={{ color: "white", fontSize: "24px" }} />
           <Text className="text-[12px] xs:hidden">Home</Text>
         </a>
       </li>
       <li>
-        <a className="flex flex-col items-center">
+        <a className="flex flex-col items-center" href="/tagList">
           <FolderOutlined style={{ color: "white", fontSize: "24px" }} />
           <Text className="text-[12px] xs:hidden">Tags</Text>
         </a>

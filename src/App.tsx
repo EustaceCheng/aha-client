@@ -1,15 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Route,
+  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/home";
-import BasicLayout from "./components/layout";
-import Results from "./pages/results";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Tags from "./pages/tags";
 import ThemeConfigProvider from "./components/Providers";
+import BasicLayout from "./components/layout";
+import Home from "./pages/home";
+import Tags from "./pages/tags";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +16,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<Home />} />
-      <Route path="results" element={<Results />} />
       <Route path="tagList" element={<Tags />} />
     </Route>
   )

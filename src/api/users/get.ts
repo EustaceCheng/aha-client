@@ -15,9 +15,9 @@ type UsersResponse = {
 };
 
 type UsersParams = {
-  page: number;
-  pageSize: number;
-  keyword: string;
+  page?: number;
+  pageSize?: number;
+  keyword?: string;
 };
 
 export const getUsers = async (params?: UsersParams) => {
