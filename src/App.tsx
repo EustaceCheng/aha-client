@@ -6,7 +6,6 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import ThemeConfigProvider from "./components/Providers";
-import BasicLayout from "./components/layout";
 import Home from "./pages/home";
 import Tags from "./pages/tags";
 
@@ -25,9 +24,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeConfigProvider>
-        <BasicLayout>
-          <RouterProvider router={router} />
-        </BasicLayout>
+        <RouterProvider router={router} />
       </ThemeConfigProvider>
     </QueryClientProvider>
   );
