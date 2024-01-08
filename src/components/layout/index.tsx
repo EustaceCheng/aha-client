@@ -7,7 +7,7 @@ const { Header, Content } = Layout;
 
 const BasicLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Layout className="min-h-screen bg-black xs:px-[21px] sm:pl-[211px] sm:pt-[54px]">
+    <Layout className="min-h-screen bg-black xs:px-[21px] sm:pl-[211px] sm:pt-[32px]">
       <Header className="bg-black h-[70px] pl-0 pt-7 sm:hidden">
         <span>
           <LogoIcon />

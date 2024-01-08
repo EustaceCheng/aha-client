@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="w-[calc(100%-375px)] pr-[130px] h-full lg:w-full xs:pr-0">
+      <div className="w-[calc(100%-375px)] pt-[22px] pr-[130px] h-full lg:w-full xs:pr-0">
         {type === "results" ? <Results /> : <Search />}
       </div>
       <div className="lg:hidden">
