@@ -37,10 +37,10 @@ const Follower = () => {
     <Card
       style={{
         width: FOLLOWER_WIDTH,
-        height: "100%",
+        height: "calc(100vh - 32px)",
         backgroundColor: "black",
         border: "none",
-        overflow: "scroll",
+        overflowY: "auto",
       }}
       headStyle={{
         borderColor: "grey",

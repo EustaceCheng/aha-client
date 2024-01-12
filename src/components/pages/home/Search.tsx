@@ -28,36 +28,38 @@ const Search = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col text-left">
-        <Text className="text-2xl pb-5">Search</Text>
-        <BasicInput
-          placeholder="Keyword"
-          value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value);
-          }}
-        />
-      </div>
-      <Divider className="my-[30px]" />
-      <div className="flex flex-col text-left">
-        <Text className="text-2xl pb-5"># of results per page</Text>
-        <div className="pb-5">
-          <Text className="text-5xl pr-2.5">30</Text>
-          <Text className="text-base">results</Text>
+    <div className="h-[calc(100vh-32px)] flex flex-col justify-between overflow-y-auto pr-[130px]">
+      <div>
+        <div className="flex flex-col text-left">
+          <Text className="text-2xl pb-5">Search</Text>
+          <BasicInput
+            placeholder="Keyword"
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+          />
         </div>
-        <BasicSlider
-          value={Number(sliderValue)}
-          onChange={(e) => {
-            setSliderValue(String(e));
-          }}
-        />
+        <Divider className="my-[30px]" />
+        <div className="flex flex-col text-left">
+          <Text className="text-2xl pb-5"># of results per page</Text>
+          <div className="pb-5">
+            <Text className="text-5xl pr-2.5">30</Text>
+            <Text className="text-base">results</Text>
+          </div>
+          <BasicSlider
+            value={Number(sliderValue)}
+            onChange={(e) => {
+              setSliderValue(String(e));
+            }}
+          />
+        </div>
+        <Divider className="my-[30px]" />
       </div>
-      <Divider className="my-[30px]" />
-      <div className="absolute bottom-[87px] w-[343px]">
+      <div className="w-[311px]">
         <BasicButton label="SEARCH" onClick={handleSearch} />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -20,34 +20,37 @@ const Results = () => {
   const keyword = searchParams.get("keyword") || undefined;
   const pageSize = Number(searchParams.get("pageSize")) || undefined;
   const page = Number(searchParams.get("page")) || undefined;
-  const { data, fetchNextPage, isLoading } = useInfiniteQuery({
-    initialPageParam: {
-      pageSize: pageSize,
-      page: 1,
-      keyword: keyword,
-    },
-    queryKey: ["getUsers"],
-    select: ({ pages, pageParams }) => {
-      const result: ResultType[] = [];
-      pages.forEach((record) => {
-        record.data.forEach((event) => {
-          result.push({
-            ...event,
+  const { data, fetchNextPage, isLoading, isFetchingNextPage } =
+    useInfiniteQuery({
+      initialPageParam: {
+        pageSize: pageSize,
+        page: 1,
+        keyword: keyword,
+      },
+
+      queryKey: ["getUsers"],
+      select: ({ pages, pageParams }) => {
+        const result: ResultType[] = [];
+        pages.forEach((record) => {
+          record.data.forEach((event) => {
+            result.push({
+              ...event,
+            });
           });
         });
-      });
-      return { pages: result, pageParams };
-    },
-    queryFn: () => getUsers({ keyword, pageSize, page }),
-    getNextPageParam: (lastPage) =>
-      lastPage.page + 1 > lastPage.totalPages
-        ? undefined
-        : {
-            pageSize: pageSize,
-            page: lastPage.page + 1,
-            keyword: keyword,
-          },
-  });
+        return { pages: result, pageParams };
+      },
+      queryFn: () => getUsers({ keyword, pageSize, page }),
+      refetchOnWindowFocus: false,
+      getNextPageParam: (lastPage) =>
+        lastPage.page + 1 > lastPage.totalPages
+          ? undefined
+          : {
+              pageSize: pageSize,
+              page: lastPage.page + 1,
+              keyword: keyword,
+            },
+    });
 
   const handleBack = () => {
     setSearchParams({
@@ -55,19 +58,25 @@ const Results = () => {
     });
   };
 
-  if (isLoading) {
+  if (isLoading || isFetchingNextPage) {
     return (
-      <div>
+      <div className="h-[calc(100vh-32px)]">
         <Spin />
       </div>
     );
   }
 
+  console.log({ isLoading, isFetchingNextPage });
+
   return (
     <div className="h-full">
-      <Space>
-        <Button type="link" icon={<LeftOutlined />} onClick={handleBack} />
-        <Text className="text-2xl pb-5">Results</Text>
+      <Space className="mb-5">
+        <Button
+          type="link"
+          icon={<LeftOutlined style={{ color: "white" }} />}
+          onClick={handleBack}
+        />
+        <Text className="text-2xl">Results</Text>
       </Space>
       {isEmpty(data?.pages) ? (
         <Empty
@@ -76,24 +85,26 @@ const Results = () => {
           description={<Text>No Data</Text>}
         />
       ) : (
-        <>
+        <div className="h-[calc(100vh-160px)] overflow-y-auto flex flex-col justify-between">
           <div className="flex flex-wrap">
-            {data?.pages?.map(({ avater, username, name, id }) => (
+            {data?.pages?.map(({ avater, username, name, id }, index) => (
               <ResultCard
-                key={id}
+                key={id + index}
                 imgUrl={avater}
                 title={name}
                 username={username}
               />
             ))}
           </div>
-          <BasicButton
-            label="MORE"
-            onClick={async () => {
-              await fetchNextPage;
-            }}
-          />
-        </>
+          <div className="w-[343px]">
+            <BasicButton
+              label="MORE"
+              onClick={async () => {
+                await fetchNextPage();
+              }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
