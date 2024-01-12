@@ -7,11 +7,13 @@ type ResultCardProps = {
   imgUrl: string;
   title: string;
   username: string;
+  key: string;
 };
 
-const ResultCard = ({ title, username }: ResultCardProps) => {
+const ResultCard = ({ key, title, username }: ResultCardProps) => {
   return (
     <Card
+      key={key}
       hoverable={false}
       style={{ width: 219, height: 197, marginRight: 34, marginBottom: 31 }}
       bodyStyle={{

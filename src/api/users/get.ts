@@ -1,6 +1,6 @@
 import axios from "axios";
 
-type UsersResponse = {
+export type UsersResponse = {
   total: number;
   totalPages: number;
   page: number;
@@ -14,7 +14,7 @@ type UsersResponse = {
   }[];
 };
 
-type UsersParams = {
+export type UsersParams = {
   page?: number;
   pageSize?: number;
   keyword?: string;

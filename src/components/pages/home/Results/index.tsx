@@ -6,50 +6,22 @@ import { LeftOutlined } from "@ant-design/icons";
 import { useSearchParams } from "react-router-dom";
 import ResultCard from "./ResultCard";
 import { isEmpty } from "ramda";
+import { DEFAULT_CURRENT_PAGE } from "../../../../constants/shared/pagination";
 
 const { Text } = Typography;
-type ResultType = {
-  avater: string;
-  username: string;
-  name: string;
-  id: string;
-};
 
 const Results = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get("keyword") || undefined;
   const pageSize = Number(searchParams.get("pageSize")) || undefined;
-  const page = Number(searchParams.get("page")) || undefined;
+
   const { data, fetchNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      initialPageParam: {
-        pageSize: pageSize,
-        page: 1,
-        keyword: keyword,
-      },
-
-      queryKey: ["getUsers"],
-      select: ({ pages, pageParams }) => {
-        const result: ResultType[] = [];
-        pages.forEach((record) => {
-          record.data.forEach((event) => {
-            result.push({
-              ...event,
-            });
-          });
-        });
-        return { pages: result, pageParams };
-      },
-      queryFn: () => getUsers({ keyword, pageSize, page }),
+      initialPageParam: { keyword, pageSize, page: DEFAULT_CURRENT_PAGE },
+      queryKey: ["getUsers", keyword],
+      queryFn: ({ pageParam }) => getUsers(pageParam),
       refetchOnWindowFocus: false,
-      getNextPageParam: (lastPage) =>
-        lastPage.page + 1 > lastPage.totalPages
-          ? undefined
-          : {
-              pageSize: pageSize,
-              page: lastPage.page + 1,
-              keyword: keyword,
-            },
+      getNextPageParam: (res) => ({ keyword, pageSize, page: res.page + 1 }),
     });
 
   const handleBack = () => {
@@ -57,6 +29,7 @@ const Results = () => {
       type: "search",
     });
   };
+  const { pages = [] } = data || {};
 
   if (isLoading || isFetchingNextPage) {
     return (
@@ -65,9 +38,8 @@ const Results = () => {
       </div>
     );
   }
-
-  console.log({ isLoading, isFetchingNextPage });
-
+  const flag =
+    pages?.[pages.length - 1].totalPages !== pages?.[pages.length - 1].page;
   return (
     <div className="h-full">
       <Space className="mb-5">
@@ -78,7 +50,7 @@ const Results = () => {
         />
         <Text className="text-2xl">Results</Text>
       </Space>
-      {isEmpty(data?.pages) ? (
+      {isEmpty(pages) ? (
         <Empty
           className="relative top-[120px]"
           image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -87,23 +59,28 @@ const Results = () => {
       ) : (
         <div className="h-[calc(100vh-160px)] overflow-y-auto flex flex-col justify-between">
           <div className="flex flex-wrap">
-            {data?.pages?.map(({ avater, username, name, id }, index) => (
-              <ResultCard
-                key={id + index}
-                imgUrl={avater}
-                title={name}
-                username={username}
+            {pages.map(({ data }, index) =>
+              data.map(({ id, avater, name, username }) => (
+                <ResultCard
+                  key={id + index}
+                  imgUrl={avater}
+                  title={name}
+                  username={username}
+                />
+              ))
+            )}
+          </div>
+          {flag && (
+            <div className="w-[343px]">
+              <BasicButton
+                label="MORE"
+                onClick={() => {
+                  fetchNextPage();
+                }}
+                disabled={isFetchingNextPage}
               />
-            ))}
-          </div>
-          <div className="w-[343px]">
-            <BasicButton
-              label="MORE"
-              onClick={async () => {
-                await fetchNextPage();
-              }}
-            />
-          </div>
+            </div>
+          )}
         </div>
       )}
     </div>

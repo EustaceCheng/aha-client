@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import BasicButton from "../../shared/BasicButton";
 import BasicInput from "../../shared/BasicInput";
 import BasicSlider from "../../shared/BasicSlider";
-import { DEFAULT_CURRENT_PAGE } from "../../../constants/shared/pagination";
 
 const { Text } = Typography;
 
@@ -22,7 +21,6 @@ const Search = () => {
     setSearchParams({
       [FormItemName.KEYWORD]: inputValue,
       [FormItemName.PAGE_SIZE]: sliderValue,
-      page: String(DEFAULT_CURRENT_PAGE),
       type: "results",
     });
   };
