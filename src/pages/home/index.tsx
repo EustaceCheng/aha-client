@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <BasicLayout>
-      <div className="flex ">
+      <div className="flex">
         <div className="w-[calc(100%-375px)] pt-[22px] pb-[87px] lg:w-full xs:pr-0">
           {type === "results" ? <Results /> : <Search />}
         </div>

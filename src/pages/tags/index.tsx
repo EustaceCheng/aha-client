@@ -21,9 +21,9 @@ const Tags = () => {
 
   return (
     <BasicLayout>
-      <div>
+      <div className="pl-[47px] pt-[48px]">
         <Text className="text-2xl">Tags</Text>
-        <div className="flex flex-wrap mt-6 pr-[180px] xs:pr-0">
+        <div className="flex flex-wrap mt-6 pr-[233px] xs:pr-0 xs:pl-0">
           {data?.map(({ name, count, id }) => (
             <TagCard key={id} title={name} count={count} />
           ))}
